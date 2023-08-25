@@ -29,7 +29,7 @@ app.get('/login', (req, res) => {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
 
-  const scope = 'user-read-private user-read-email';
+  const scope = 'user-read-private user-read-email user-follow-read';
 
   const queryParams = querystring.stringify({
     client_id: CLIENT_ID,
@@ -61,9 +61,12 @@ app.get('/callback', (req, res) => {
   })
     .then(response => {
       if (response.status === 200) {
-        
+
         const { access_token, token_type } = response.data;
-        
+
+        res.redirect('http://localhost:3000');
+
+        /*
         axios.get('https://api.spotify.com/v1/me', {
           headers: {
             Authorization: `${token_type} ${access_token}`
@@ -75,6 +78,7 @@ app.get('/callback', (req, res) => {
           .catch(error => {
             res.send(error);
           });
+        */
 
       } else {
         res.send(response);
@@ -89,7 +93,7 @@ app.get('/callback', (req, res) => {
 app.get('/refresh_token', (req, res) => {
   const { refresh_token } = req.query;
 
-  axios({ 
+  axios({
     method: 'POST',
     url: 'https://accounts.spotify.com/api/token',
     data: querystring.stringify({
@@ -108,3 +112,19 @@ app.get('/refresh_token', (req, res) => {
       res.send(error);
     });
 });
+
+app.get('/user_profile', (req, res) => {
+  console.log("You got here!");
+  axios.get('https://api.spotify.com/v1/me', {
+    headers: {
+      Authorization: `${token_type} ${access_token}`
+    }
+  })
+    .then(response => {
+      //res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
+      res.send(response);
+    })
+    .catch(error => {
+      res.send(error);
+    });
+})
