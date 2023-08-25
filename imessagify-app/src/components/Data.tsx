@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+
 import { Avatar, Box, Flex, Image, Spacer, Text, VStack } from '@chakra-ui/react';
 import { ReactComponent as Battery } from "../assets/icons/Battery.svg";
 import { ReactComponent as Cellular } from "../assets/icons/CellularConnection.svg";
@@ -20,6 +22,17 @@ import storeGreyed from "../assets/icons/AppStoreGreyed.svg";
 export function Data() {
     const appIcons = [photos, store, applePay, fitness, diagram, memoji, heart];
     const date = getTime(new Date());
+
+    const [profile, setProfile] = useState([]);
+
+    /*
+    useEffect(() => {
+        fetch('/user_profile')
+            .then((response) => response.json())
+            .then((data) => setProfile(data))
+            .catch((error) => console.error('Error fetching user profile: ', error));
+    }, []);
+    */
 
     // helper function that gets the user's current time in HH:MM format
     function getTime(date: Date) {
