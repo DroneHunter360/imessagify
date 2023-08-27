@@ -17,31 +17,28 @@ import photos from "../assets/icons/AppPhotos.svg";
 import store from "../assets/icons/AppStore.svg";
 import storeGreyed from "../assets/icons/AppStoreGreyed.svg";
 
-/////////////// IMPORTANT: EVENTUALLY POPULATE THE AVATAR AS THE USER SPOTIFY PROFILE ICON
-
 export function Data() {
     const appIcons = [photos, store, applePay, fitness, diagram, memoji, heart];
     const date = getTime(new Date());
 
-    const [profile, setProfile] = useState([]);
+    const [profile, setProfile] = useState({});
 
-    /*
     useEffect(() => {
         fetch('/user_profile')
-            .then((response) => response.json())
-            .then((data) => setProfile(data))
-            .catch((error) => console.error('Error fetching user profile: ', error));
+            .then(response => response.json())
+            .then(data => setProfile(data))
+            .catch(error => console.error('Error fetching user profile: ', error));
     }, []);
-    */
 
     // helper function that gets the user's current time in HH:MM format
-    function getTime(date: Date) {
+    function getTime(date) {
         const localTime = date.toLocaleTimeString().split(':');
         return `${localTime[0]}:${localTime[1]}`
     }
 
     return (
         <Box bg="#FFF" borderRadius="20px" w="375px" h="812px">
+            {console.log(profile)}
             <Box borderTopRadius="20px" bg="#F1F1F2" h="116px">
                 <Box h="44px" color="black">
                     <Flex align="center" gap="4px" pl="35px" pr="16px" pt="15px">
@@ -57,9 +54,11 @@ export function Data() {
                         <Image src={arrow} />
                         <Spacer />
                         <VStack>
+                            {/*{profile.images[0]?.url ? (<Image src={profile.images[0]["url"]} borderRadius="25px" />) : (<Avatar w="48px" h="48px" />)}
+                            <Image src={profile.images[0]["url"]} borderRadius="25px" />*/}
                             <Avatar w="48px" h="48px" />
                             <Text fontSize="10px" fontWeight="400">
-                                Steven &#x203A;
+                                iMessagify &#x203A;
                             </Text>
                         </VStack>
                         <Spacer />

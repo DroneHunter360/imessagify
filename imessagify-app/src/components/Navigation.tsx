@@ -27,30 +27,24 @@ export function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box>
+    <Box mt="15px">
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         py={{ base: 2 }}
-        px={{ base: 4 }}
         borderBottom={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}>
-            <Logo width={35} height={35} />
-          </Text>
+        <Flex flex={{ base: 1 }} justify={'start'}>
+          <Logo width={35} height={35}/>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>
-
+      
         <Stack
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
@@ -66,7 +60,7 @@ export function NavBar() {
             variant={'ghost'}
             aria-label={'Toggle Navigation'}
           />
-          <Button
+          {/*<Button
             as={'a'}
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
@@ -74,19 +68,20 @@ export function NavBar() {
             variant={'link'}
             href={"#"}>
             About
-          </Button>
+          </Button>*/}
           <Button
             as={'a'}
             display={{ base: 'none', md: 'inline-flex' }}
+            borderRadius={"20px"}
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
-            bg={'pink.400'}
+            bg={'orange.500'}
             href={'http://localhost:8888/login'}
             _hover={{
-              bg: 'pink.300',
+              bg: 'orange.400',
             }}>
-            Sign In
+            Log in with Spotify
           </Button>
         </Stack>
       </Flex>
@@ -100,8 +95,8 @@ export function NavBar() {
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+  const linkHoverColor = useColorModeValue('gray.800', 'orange.400');
+  const popoverContentBgColor = useColorModeValue('white', 'gray.700');
 
   return (
     <Stack direction={'row'} spacing={4}>
@@ -131,12 +126,52 @@ const DesktopNav = () => {
                 p={4}
                 rounded={'xl'}
                 minW={'sm'}>
+                <Stack>
+                {navItem.children.map((child) => (
+                  <DesktopSubNav key={child.label} {...child} />
+                ))}
+                </Stack>
               </PopoverContent>
             )}
           </Popover>
         </Box>
       ))}
     </Stack>
+  );
+};
+
+const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+  return (
+    <Link
+      href={href}
+      role={'group'}
+      display={'block'}
+      p={2}
+      rounded={'md'}
+      _hover={{ bg: useColorModeValue('orange.50', 'gray.900') }}>
+      <Stack direction={'row'} align={'center'}>
+        <Box>
+          <Text
+            transition={'all .3s ease'}
+            _groupHover={{ color: 'orange.400' }}
+            fontWeight={500}
+            fontSize={'sm'}>
+            {label}
+          </Text>
+          <Text fontSize={'sm'}>{subLabel}</Text>
+        </Box>
+        <Flex
+          transition={'all .3s ease'}
+          transform={'translateX(-10px)'}
+          opacity={0}
+          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
+          justify={'flex-end'}
+          align={'center'}
+          flex={1}>
+          <Icon color={'orange.400'} w={5} h={5} as={ChevronRightIcon} />
+        </Flex>
+      </Stack>
+    </Link>
   );
 };
 
@@ -185,7 +220,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 
       <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
         <Stack
-          mt={2}
+          mt={"-10px"}
           pl={4}
           borderLeft={1}
           borderStyle={'solid'}
@@ -212,41 +247,17 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Inspiration',
-    children: [
-      {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
-        href: '#',
-      },
-      {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: '#',
-      },
-    ],
+    label: 'Contribute',
+    href: '#',
   },
   {
-    label: 'Find Work',
-    children: [
-      {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
-        href: '#',
-      },
-      {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'Login To Spotify',
-    href: '/login',
-  },
-  {
-    label: 'Hire Designers',
+    label: 'About',
+    children: [{
+      label: 'About iMessagify',
+    }, 
+    {
+      label: 'Meet the creator',
+    }],
     href: '#',
   },
 ];
