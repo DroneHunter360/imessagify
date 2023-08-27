@@ -5,7 +5,7 @@ import { Data } from "./Data";
 export function Hero() {
     return (
         <Flex mt={10}>
-            <Box width={650} height={300}>
+            <Box width={650} height={"fit-content"}>
                 <Text
                     bgGradient='linear(rgba(131,58,180,1) 0%, rgba(255,5,5,1) 0%, rgba(252,176,69,1) 100%)'
                     bgClip={'text'}
@@ -21,7 +21,7 @@ export function Hero() {
                     align={"start"}
                     pt={"20px"}
                     fontSize={'lg'}
-                    pr={{base: "0", md: "160px"}}
+                    pr={"25%"}
                 >
                     Experience all your top tracks and artists through the familiar iMessage chat interface, bringing your music habits to life like never before.
                 </Text>
@@ -31,7 +31,7 @@ export function Hero() {
                     </Button>
                 </Flex>
             </Box>
-            <Box display={{base: "none", md: "block"}} pt={"20px"}>
+            <Box display={{base: "none", md: "block"}} pt="20px" pl={{base: 20}}>
                 <Data />
             </Box>
         </Flex>

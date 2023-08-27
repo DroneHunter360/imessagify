@@ -68,7 +68,11 @@ export function Data() {
             </Box>
             <Box bg="#FFF" h="621px" color="black">
                 <Box h="580px">
-
+                    <Box>
+                        <Text>
+                            Hello
+                        </Text>
+                    </Box>
                 </Box>
                 <Flex pl="17px" gap="22px">
                     <Image src={camera} />

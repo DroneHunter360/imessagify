@@ -248,7 +248,7 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Contribute',
-    href: '#',
+    href: 'https://github.com/DroneHunter360/imessagify',
   },
   {
     label: 'About',
@@ -257,6 +257,7 @@ const NAV_ITEMS: Array<NavItem> = [
     }, 
     {
       label: 'Meet the creator',
+      href: 'https://www.linkedin.com/in/stevenahua/'
     }],
     href: '#',
   },
