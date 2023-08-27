@@ -12,7 +12,6 @@ import {
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
 } from '@chakra-ui/react';
 import {
@@ -22,6 +21,7 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 import { Logo } from './Logo';
+import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 export function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -50,6 +50,7 @@ export function NavBar() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
+          <ColorModeSwitcher display={{ base: 'flex', md: 'none' }} />
           <IconButton
             ml={{ base: -2 }}
             display={{ base: 'flex', md: 'none' }}
@@ -69,6 +70,7 @@ export function NavBar() {
             href={"#"}>
             About
           </Button>*/}
+          <ColorModeSwitcher display={{ base: 'none', md: 'flex' }}/>
           <Button
             as={'a'}
             display={{ base: 'none', md: 'inline-flex' }}
