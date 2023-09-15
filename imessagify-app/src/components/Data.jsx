@@ -21,14 +21,25 @@ export function Data() {
     const appIcons = [photos, store, applePay, fitness, diagram, memoji, heart];
     const date = getTime(new Date());
 
-    const [profile, setProfile] = useState({});
+    const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
-        fetch('/user_profile')
-            .then(response => response.json())
-            .then(data => setProfile(data))
-            .catch(error => console.error('Error fetching user profile: ', error));
+        fetch('/logged_in')
+            .then(res => res.json())
+            .then(data => setLoggedIn(data))
+            .catch(error => console.log('Error fetching logged in state: ', error));
     }, []);
+
+    const [tracks, setTracks] = useState([]);
+
+    useEffect(() => {
+        if (loggedIn) {
+            fetch('/top_tracks')
+                .then(response => response.json())
+                .then(data => setTracks(data))
+                .catch(error => console.error('Error fetching user profile: ', error));
+        }
+    }, [loggedIn]);
 
     // helper function that gets the user's current time in HH:MM format
     function getTime(date) {
@@ -38,7 +49,6 @@ export function Data() {
 
     return (
         <Box bg="#FFF" borderRadius="20px" w="375px" h="812px">
-            {console.log(profile)}
             <Box borderTopRadius="20px" bg="#F1F1F2" h="116px">
                 <Box h="44px" color="black">
                     <Flex align="center" gap="4px" pl="35px" pr="16px" pt="15px">
@@ -68,9 +78,11 @@ export function Data() {
             </Box>
             <Box bg="#FFF" h="621px" color="black">
                 <Box h="580px">
-                    <Box>
+                    <Box textAlign={'left'}>
                         <Text>
-                            Hello
+                            {tracks ? tracks.map((song, index) => (
+                                <Text key={index}>{song}</Text>
+                            )) : <Text>Nothing currently</Text>}
                         </Text>
                     </Box>
                 </Box>
