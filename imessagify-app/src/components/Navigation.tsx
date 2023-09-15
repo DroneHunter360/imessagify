@@ -38,7 +38,9 @@ export function NavBar() {
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}>
         <Flex flex={{ base: 1 }} justify={'start'}>
-          <Logo width={35} height={35}/>
+          <Box as='a' href='/'>
+            <Logo width={35} height={35}/>
+          </Box>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
