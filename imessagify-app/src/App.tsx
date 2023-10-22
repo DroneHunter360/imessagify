@@ -15,11 +15,11 @@ export const App = () => (
     <Box 
       textAlign="center"
       fontSize="xl"
-      mx={{ base: '30px', md: '50px', lg: '80px', xl: '250px', "2xl": '400px'}}
+      px={{ base: '30px', md: '50px', lg: '80px', xl: '250px', "2xl": '400px'}}
     >
       <NavBar />
       <Hero />
-      <Flex display={{base: "block", md: "none"}} align="center" justify={'center'} mt={"40px"}>
+      <Flex display={{base: "flex", md: "none"}} justify={"center"} mt={"40px"}>
         <Data />
       </Flex>
       <Box mt={"80px"}>
